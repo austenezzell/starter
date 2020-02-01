@@ -1,0 +1,86 @@
+@import 'variables';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+
+// Type
+@font-face {
+    font-family: "everett_medium";
+    src: url('../fonts/EverettTrial-Medium-web.woff') format('woff');
+    font-family: "everett_regular";
+    src: url('../fonts/EverettTrial-Regular-web.woff') format('woff');
+}
+
+body {
+  font-family: everett_regular;
+  color: blue;
+}
+
+a {
+  color: blue;
+}
+
+
+// LAYOUT
+.layout-margin {
+  padding: $layout-margin;
+}
+.grid-parent {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat($grid-columns,1fr);
+  width: 100%;
+  justify-items: start;
+  align-content: start;
+  grid-row-gap: $grid-gutters;
+}
+
+.grid-item {
+  grid-column-end: auto;
+  grid-column-start: auto;
+  object-fit: cover;
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+// MOBILE
+@for $i from 1 through $grid-columns {
+  .grid-start-#{$i} {
+    grid-column-start: $i;
+  }
+}
+
+@for $i from 1 through $grid-columns {
+  .grid-span-#{$i} {
+    grid-column-end: span #{$i};
+  }
+}
+
+
+// DESKTOP
+@media all and (min-width: 600px) {
+  @for $i from 1 through $grid-columns {
+    .desktop-grid-start-#{$i} {
+      grid-column-start: $i;
+    }
+  }
+
+  @for $i from 1 through $grid-columns {
+    .desktop-grid-span-#{$i} {
+      grid-column-end: span #{$i};
+    }
+  }
+}
+
+// HELPERS
+.w100 {
+  width: 100%;
+  height: auto;
+}
